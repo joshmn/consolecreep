@@ -94,6 +94,19 @@ ConsoleCreep.setup do |config|
   #
   # Default:
   #   config.log_for_user = ->(user) { true }
+  #
+  # == Filtering out specific results
+  #
+  # Pass an array of filter objects — an object that responds to `.call` and accepts arguments of `user`, `command`, `result`, `error`,
+  # and return false if you want to exclude it from being stored by your `store`.
+  #
+  # Default:
+  #   config.filters << ->(user, command, result, error) { true } 
+  # 
+  # Ignore everything that's an error:
+  #   config.filters << ->(user, command, result, error) { error.present? } 
+  #
+  # log_for_user takes precedence.
 end
 ```
 

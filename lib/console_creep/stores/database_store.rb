@@ -5,22 +5,20 @@ module ConsoleCreep
     class DatabaseStore < Store
       def store(user, command, result, error)
         ActiveRecord::Base.logger.silence do
-          record = {user: user, command: command, result: result, error: error}
+          record = { user: user, command: command, result: result, error: error }
           record.delete_if { |k, _v| except_columns.include?(k) }
-          model_name.constantize.create(record)
+          model_name.create(record)
         end
       end
 
       private
 
       def except_columns
-        return [] if options[:except].nil?
-
         Array.wrap(options[:except])
       end
 
       def model_name
-        'ConsoleCreepLog'
+        options[:model].to_s.constantize
       end
     end
   end

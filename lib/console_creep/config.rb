@@ -9,6 +9,7 @@ module ConsoleCreep
     attr_accessor :log_for_user
     attr_accessor :welcome
     attr_accessor :enabled
+    attr_accessor :filters
 
     def initialize
       @store = Stores::LoggerStore.new
@@ -16,6 +17,7 @@ module ConsoleCreep
       @log_for_user = ->(user) { true }
       @welcome = ->(user) { puts "\n"; puts "Welcome #{user.email}!"; puts "As a reminder, this session is recorded." }
       @enabled = Rails.env.production?
+      @filters = []
     end
 
     def authenticator=(*args)
@@ -32,7 +34,7 @@ module ConsoleCreep
               elsif store_class == :logger
                 Stores::LoggerStore
               elsif store_class.is_a?(Symbol)
-                store_class.classify.constantize
+                store_class.to_s.classify.constantize
               elsif store_class.is_a?(String)
                 store_class.constantize
               else
@@ -47,6 +49,11 @@ module ConsoleCreep
 
     def log_for_user?(user)
       @log_for_user.call(user)
+    end
+
+    def filters=(val)
+      @filters << Array.wrap(val)
+      @filters.flatten!
     end
   end
 end

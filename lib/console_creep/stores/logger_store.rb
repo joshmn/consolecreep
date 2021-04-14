@@ -3,8 +3,10 @@ require 'console_creep/stores/store'
 module ConsoleCreep
   module Stores
     class LoggerStore < Store
-      def initialize(options = {file: Rails.root.join("log/console.log") } )
-        @options = options
+
+      def initialize(options = {})
+        super
+        @options[:file] ||= Rails.root.join("log/console.log")
         @logger = Logger.new(@options[:file])
       end
 
