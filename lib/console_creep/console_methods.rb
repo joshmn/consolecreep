@@ -5,7 +5,7 @@ module Rails
         ConsoleCreep.config.authenticator.call
         return true
       end
-      exit("Exiting console.")
+      exit(0)
     end
   end
 end

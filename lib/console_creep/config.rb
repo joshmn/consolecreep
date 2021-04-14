@@ -18,14 +18,19 @@ module ConsoleCreep
       @enabled = Rails.env.production?
     end
 
-    def authenticator=(*args)
-      auth_class = args.shift
+    def authenticator=(args)
+      klass = args.first
       options = args.extract_options!
+      if klass == :devise
+        auth_class = Authenticators::DeviseAuthenticator
+      else
+        auth_class = klass.to_s.constantize
+      end
       @authenticator = auth_class.new(options)
     end
 
-    def store=(*args)
-      store_class = args.shift
+    def store=(args)
+      store_class = args.first
       options = args.extract_options!
       klass = if store_class == :database
                 Stores::DatabaseStore
