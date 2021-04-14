@@ -4,8 +4,8 @@
 require_relative '../lib/console_creep/version'
 
 version = ConsoleCreep::VERSION
-system('gem build consolecreep.gemspec')
-system("gem push consolecreep-#{version}.gem")
-system("rm consolecreep-#{version}.gem")
+system('gem build console_creep.gemspec')
+system("gem push console_creep-#{version}.gem")
+system("rm console_creep-#{version}.gem")
 system("git tag -a v#{version} -m 'version #{version}'")
 system("git push origin v#{version}")
