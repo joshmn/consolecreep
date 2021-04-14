@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "consolecreep"
+require "console_creep"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

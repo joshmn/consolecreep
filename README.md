@@ -49,16 +49,24 @@ ConsoleCreep.setup do |config|
   # options are `:error`, `:result`, `:command`
   #   config.store = :database, { model: 'ConsoleCreepLog', except: [:result] }
   
-  ## Enabled for this Rails.env (default is `Rails.env.production?`)
-  #   config.enabled = true
+  ## Authentication
+  # 
+  # Defaults to :devise but there is no other one at the moment.
+  # Create your own. See `lib/authenticators/devise_authenticator.rb``
+  #
+  # Use the devise authenticator and use a custom class:
+  # config.authenticator = :devise, { class: "AdminUser" }
+  #
+  # or use a proc:
+  # config.authenticator = :devise, { if: ->(user) { user.admin? } }
+  
+  ## Welcome Message
+  # 
+  # Change the welcome message.
+  # config.welcome = ->(user) { "hey user #{user}" }
   
   ## Enabled for the logged-in user (default is true)
   #  config.log_for_user = ->(user) { !user.doctor? }
-
-  ## Change the authentication scheme
-  #   config.authenticator = :devise
-  # if your class name is Admin:
-  #   config.authenticator = :devise, { class: 'Admin' }
 end
 ```
 

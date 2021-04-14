@@ -24,8 +24,18 @@ module ConsoleCreep
           print 'Password: '
           pass = $stdin.noecho(&:gets)
           if user.valid_password?(pass.strip)
-            set_current_user(user)
-            ConsoleCreep.config.welcome.call(user)
+            if @options[:if]
+              if @options[:if].call(user)
+                set_current_user(user)
+                ConsoleCreep.config.welcome.call(user)
+              else
+                puts "User not admin."
+                die
+              end
+            else
+              set_current_user(user)
+              ConsoleCreep.config.welcome.call(user)
+            end
           else
             puts 'Provided password is not correct! Exiting...'
             die
