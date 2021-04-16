@@ -125,10 +125,6 @@ rails g console_creep:model ConsoleLog
 
 will generate a model named `ConsoleLog` along with a migration.
 
-## Upcoming
-
-* Option for conditionally storing certain commands
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/joshmn/consolecreep. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/joshmn/consolecreep/blob/master/CODE_OF_CONDUCT.md).
