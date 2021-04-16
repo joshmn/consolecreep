@@ -10,13 +10,13 @@ ConsoleCreep.setup do |config|
   #
   # config.enabled = Rails.env.staging? || Rails.env.production?
   #
-  # == Authentication
+  # == Authorization
   #
   # How you want to handle a user logging into Rails Console. Defaults
   # to a `:devise` strategy, which allows you to login with an email/password combo.
   #
   # Default:
-  #   config.authentication = :devise
+  #   config.authorization = :devise
   #
   # You can optionally set the class of the Devise user that is presumed to be an admin, or
   # have an admin flag.

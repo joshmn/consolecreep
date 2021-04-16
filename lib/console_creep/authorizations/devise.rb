@@ -1,13 +1,14 @@
-require 'console_creep/authenticators/authenticator'
+require 'console_creep/authorization'
 
 module ConsoleCreep
-  module Authenticators
-    class DeviseAuthenticator < Authenticator
+  module Authorizations
+    class Devise < Authorization
       def initialize(options = {class: 'User'})
+        super
         @options = options
       end
 
-      def collection
+      def resource_class
         @options[:class].to_s.constantize
       end
 
@@ -15,20 +16,17 @@ module ConsoleCreep
         ActiveRecord::Base.logger.silence do
           print 'Email address: '
           email = gets
-          user = collection.find_by(email: email.strip.downcase)
+          user = resource_class.find_by(email: email.strip.downcase)
           unless user
-            puts 'Email not found in database! Exiting...'
-            die
+            die 'Email not found in database! Exiting...'
           end
 
           print 'Password: '
           pass = $stdin.noecho(&:gets)
           if user.valid_password?(pass.strip)
-            set_current_user(user)
-            ConsoleCreep.config.welcome.call(user)
+            success(user)
           else
-            puts 'Provided password is not correct! Exiting...'
-            die
+            die 'Provided password is not correct! Exiting...'
           end
         end
       end
