@@ -21,11 +21,11 @@ ConsoleCreep.setup do |config|
   # You can optionally set the class of the Devise user that is presumed to be an admin, or
   # have an admin flag.
   #
-  # config.authentication = :devise, { class: "AdminUser" }
+  # config.authorization = :devise, { class: "AdminUser" }
   #
   # Or use a proc to check if the record is an admin record:
   #
-  # config.authentication = :devise, { class: "User", if: ->(user) { user.admin? } }
+  # config.authorization = :devise, { class: "User", if: ->(user) { user.admin? } }
   #
   # == Store
   #

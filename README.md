@@ -44,22 +44,22 @@ ConsoleCreep.setup do |config|
   #
   # config.enabled = Rails.env.staging? || Rails.env.production?
   #
-  # == Authentication
+  # == Authorization
   #
   # How you want to handle a user logging into Rails Console. Defaults
   # to a `:devise` strategy, which allows you to login with an email/password combo.
   #
   # Default:
-  #   config.authentication = :devise
+  #   config.authorization = :devise
   #
   # You can optionally set the class of the Devise user that is presumed to be an admin, or
   # have an admin flag.
   #
-  # config.authentication = :devise, { class: "AdminUser" }
+  # config.authorization = :devise, { class: "AdminUser" }
   #
   # Or use a proc to check if the record is an admin record:
   #
-  # config.authentication = :devise, { class: "User", if: ->(user) { user.admin? } }
+  # config.authorization = :devise, { class: "User", if: ->(user) { user.admin? } }
   #
   # == Store
   #
@@ -94,17 +94,16 @@ ConsoleCreep.setup do |config|
   #
   # Default:
   #   config.log_for_user = ->(user) { true }
-  #
   # == Filtering out specific results
   #
   # Pass an array of filter objects — an object that responds to `.call` and accepts arguments of `user`, `command`, `result`, `error`,
   # and return false if you want to exclude it from being stored by your `store`.
   #
   # Default:
-  #   config.filters << ->(user, command, result, error) { true } 
-  # 
+  #   config.filters << ->(user, command, result, error) { true }
+  #
   # Ignore everything that's an error:
-  #   config.filters << ->(user, command, result, error) { error.present? } 
+  #   config.filters << ->(user, command, result, error) { error.present? }
   #
   # log_for_user takes precedence.
 end
